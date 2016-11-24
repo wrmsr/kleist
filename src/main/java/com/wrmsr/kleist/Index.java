@@ -19,8 +19,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.concurrent.Immutable;
 
 import java.time.Instant;
+import java.util.List;
 
 @Immutable
 public final class Index
 {
+    private final List<IndexSegment> segments;
 }
