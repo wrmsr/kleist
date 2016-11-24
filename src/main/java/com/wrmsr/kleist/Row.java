@@ -16,35 +16,46 @@ package com.wrmsr.kleist;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableList;
 
 import javax.annotation.concurrent.Immutable;
 
-import java.util.List;
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 @Immutable
-public final class Index
+public final class Row
 {
-    private final List<IndexSegment> segments;
+    private final long sequence;
+    private final byte[] data;
 
     @JsonCreator
-    public Index(
-            @JsonProperty("segments") List<IndexSegment> segments)
+    public Row(
+            @JsonProperty("sequence") long sequence,
+            @JsonProperty("data") byte[] data)
     {
-        this.segments = ImmutableList.copyOf(segments);
+        checkArgument(sequence >= 0);
+        this.sequence = sequence;
+        this.data = requireNonNull(data);
     }
 
     @Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this)
-                .add("segments", segments)
+                .add("sequence", sequence)
+                .add("data", data)
                 .toString();
     }
 
-    @JsonProperty("segments")
-    public List<IndexSegment> getSegments()
+    @JsonProperty("sequence")
+    public long getSequence()
     {
-        return segments;
+        return sequence;
+    }
+
+    @JsonProperty("data")
+    public byte[] getData()
+    {
+        return data;
     }
 }

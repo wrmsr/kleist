@@ -15,6 +15,7 @@ package com.wrmsr.kleist;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -45,6 +46,19 @@ public final class IndexSegment
         this.numRows = numRows;
         this.minSequence = minSequence;
         this.maxSequence = maxSequence;
+    }
+
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this)
+                .add("name", name)
+                .add("createdDatetime", createdDatetime)
+                .add("sizeBytes", sizeBytes)
+                .add("numRows", numRows)
+                .add("minSequence", minSequence)
+                .add("maxSequence", maxSequence)
+                .toString();
     }
 
     @JsonProperty("name")
@@ -81,51 +95,5 @@ public final class IndexSegment
     public long getMaxSequence()
     {
         return maxSequence;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        IndexSegment indexSegment = (IndexSegment) o;
-
-        if (sizeBytes != indexSegment.sizeBytes) {
-            return false;
-        }
-        if (numRows != indexSegment.numRows) {
-            return false;
-        }
-        if (minSequence != indexSegment.minSequence) {
-            return false;
-        }
-        if (maxSequence != indexSegment.maxSequence) {
-            return false;
-        }
-        if (name != null ? !name.equals(indexSegment.name) : indexSegment.name != null) {
-            return false;
-        }
-        if (createdDatetime != null ? !createdDatetime.equals(indexSegment.createdDatetime) : indexSegment.createdDatetime != null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (createdDatetime != null ? createdDatetime.hashCode() : 0);
-        result = 31 * result + (int) (sizeBytes ^ (sizeBytes >>> 32));
-        result = 31 * result + (int) (numRows ^ (numRows >>> 32));
-        result = 31 * result + (int) (minSequence ^ (minSequence >>> 32));
-        result = 31 * result + (int) (maxSequence ^ (maxSequence >>> 32));
-        return result;
     }
 }
