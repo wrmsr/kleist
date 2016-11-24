@@ -1,0 +1,51 @@
+s3/
+ my_db/
+  index/
+   00001 (json)
+  segments/
+   00001 (json/gz)
+
+
+
+
+indexSegment:
+ name
+ created_date
+ size_bytes
+ num_rows
+ min_sequence
+ max_sequence
+
+
+(steal http headers)
+ encoding?
+
+
+json schema
+
+
+index file contains all information, rewritten in entirety every time
+compaction done as in lucene
+gc done by deleting all indices too old (with failsafe of at least one) then deleting any indexSegment not referenced by any remaining index
+
+
+
+
+could directly hive interop via create table / partition by indexSegment / add partition
+ select row_number() over (partition by id order by indexSegment desc) rn, * from foo where rn = 1
+
+
+
+
+new PUT only, r-a-w guaranteed
+writing orchestrated by sql lock + generation info, reading can be done uncoordinated
+
+
+
+
+tailer process
+compaction/gc process
+pg_xlog backup watchdog, kill pid and drop slot
+
+
+schematizer? heartbeat daemon? failover?
