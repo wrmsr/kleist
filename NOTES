@@ -53,3 +53,4 @@ schematizer? heartbeat daemon? failover?
 
 
 http://bigdataconcepts-nsm.blogspot.com/2012/09/rc-file-rcfile-record-columnar-file-is.html
+https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC
