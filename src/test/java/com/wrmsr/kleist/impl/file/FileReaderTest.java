@@ -5,12 +5,12 @@ import junit.framework.TestCase;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class FileIndexReaderTest
+public class FileReaderTest
         extends TestCase
 {
     public void testIndexReader()
             throws IOException
     {
-        new FileIndexReader(Paths.get("/Users/will/barf"));
+        new FileReader(Paths.get("/Users/will/barf"));
     }
 }

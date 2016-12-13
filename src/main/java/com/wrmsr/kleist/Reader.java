@@ -15,8 +15,11 @@ package com.wrmsr.kleist;
 
 import java.io.IOException;
 
-public interface IndexReader
+public interface Reader
 {
     Index readIndex()
+            throws IOException;
+
+    RecordIterator getRecordIterator(String segmentName, String splitName)
             throws IOException;
 }

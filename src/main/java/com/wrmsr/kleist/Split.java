@@ -19,25 +19,28 @@ import com.google.common.base.MoreObjects;
 
 import javax.annotation.concurrent.Immutable;
 
-import java.time.Instant;
-import java.util.List;
-
 @Immutable
-public final class IndexSegment
+public final class Split
 {
     private final String name;
-    private final Instant createdDatetime;
-    private final List<IndexSegmentSplit> splits;
+    private final long sizeBytes;
+    private final long numRecords;
+    private final long minSequence;
+    private final long maxSequence;
 
     @JsonCreator
-    public IndexSegment(
+    public Split(
             @JsonProperty("name") String name,
-            @JsonProperty("created_datetime") Instant createdDatetime,
-            @JsonProperty("splits") List<IndexSegmentSplit> splits
+            @JsonProperty("size_bytes") long sizeBytes,
+            @JsonProperty("num_records") long numRecords,
+            @JsonProperty("min_sequence") long minSequence,
+            @JsonProperty("max_sequence") long maxSequence)
     {
         this.name = name;
-        this.createdDatetime = createdDatetime;
-        this.splits = splits;
+        this.sizeBytes = sizeBytes;
+        this.numRecords = numRecords;
+        this.minSequence = minSequence;
+        this.maxSequence = maxSequence;
     }
 
     @Override
@@ -45,8 +48,10 @@ public final class IndexSegment
     {
         return MoreObjects.toStringHelper(this)
                 .add("name", name)
-                .add("createdDatetime", createdDatetime)
-                .add("splits", splits)
+                .add("sizeBytes", sizeBytes)
+                .add("numRecords", numRecords)
+                .add("minSequence", minSequence)
+                .add("maxSequence", maxSequence)
                 .toString();
     }
 
@@ -56,15 +61,27 @@ public final class IndexSegment
         return name;
     }
 
-    @JsonProperty("created_datetime")
-    public Instant getCreatedDatetime()
+    @JsonProperty("size_bytes")
+    public long getSizeBytes()
     {
-        return createdDatetime;
+        return sizeBytes;
     }
 
-    @JsonProperty("splits")
-    public List<IndexSegmentSplit> getSplits()
+    @JsonProperty("num_records")
+    public long getNumRecords()
     {
-        return splits;
+        return numRecords;
+    }
+
+    @JsonProperty("min_sequence")
+    public long getMinSequence()
+    {
+        return minSequence;
+    }
+
+    @JsonProperty("max_sequence")
+    public long getMaxSequence()
+    {
+        return maxSequence;
     }
 }

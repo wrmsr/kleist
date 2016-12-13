@@ -13,7 +13,14 @@
  */
 package com.wrmsr.kleist;
 
-public interface SegmentReader
+import java.util.Iterator;
+
+public interface RecordIterator
+    extends Iterator<Record>, AutoCloseable
 {
-    RowIterator getRowIterator();
+    @Override
+    default void close()
+            throws Exception
+    {
+    }
 }

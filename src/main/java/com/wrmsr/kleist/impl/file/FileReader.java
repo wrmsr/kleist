@@ -15,7 +15,8 @@ package com.wrmsr.kleist.impl.file;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wrmsr.kleist.Index;
-import com.wrmsr.kleist.IndexReader;
+import com.wrmsr.kleist.Reader;
+import com.wrmsr.kleist.RecordIterator;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -27,19 +28,19 @@ import java.nio.file.Paths;
 import static java.util.Objects.requireNonNull;
 
 @Immutable
-public final class FileIndexReader
-        implements IndexReader
+public final class FileReader
+        implements Reader
 {
     private final Path rootPath;
     private final ObjectMapper objectMapper;
 
-    public FileIndexReader(Path rootPath, ObjectMapper objectMapper)
+    public FileReader(Path rootPath, ObjectMapper objectMapper)
     {
         this.rootPath = requireNonNull(rootPath);
         this.objectMapper = requireNonNull(objectMapper);
     }
 
-    public FileIndexReader(Path rootPath)
+    public FileReader(Path rootPath)
     {
         this(rootPath, new ObjectMapper());
     }
@@ -49,5 +50,12 @@ public final class FileIndexReader
             throws IOException
     {
         return requireNonNull(objectMapper.readValue(Files.readAllBytes(Paths.get(rootPath.toString(), "index.json")), Index.class));
+    }
+
+    @Override
+    public RecordIterator getRecordIterator(String segmentName, String splitName)
+            throws IOException
+    {
+        return null;
     }
 }

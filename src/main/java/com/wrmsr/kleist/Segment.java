@@ -16,35 +16,31 @@ package com.wrmsr.kleist;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableList;
 
 import javax.annotation.concurrent.Immutable;
 
 import java.time.Instant;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 @Immutable
-public final class IndexSegmentSplit
+public final class Segment
 {
     private final String name;
-    private final long sizeBytes;
-    private final long numRows;
-    private final long minSequence;
-    private final long maxSequence;
+    private final Instant createdDatetime;
+    private final List<Split> splits;
 
     @JsonCreator
-    public IndexSegmentSplit(
+    public Segment(
             @JsonProperty("name") String name,
             @JsonProperty("created_datetime") Instant createdDatetime,
-            @JsonProperty("size_bytes") long sizeBytes,
-            @JsonProperty("num_rows") long numRows,
-            @JsonProperty("min_sequence") long minSequence,
-            @JsonProperty("max_sequence") long maxSequence)
+            @JsonProperty("splits") List<Split> splits)
     {
-        this.name = name;
+        this.name = requireNonNull(name);
         this.createdDatetime = createdDatetime;
-        this.sizeBytes = sizeBytes;
-        this.numRows = numRows;
-        this.minSequence = minSequence;
-        this.maxSequence = maxSequence;
+        this.splits = ImmutableList.copyOf(splits);
     }
 
     @Override
@@ -53,10 +49,7 @@ public final class IndexSegmentSplit
         return MoreObjects.toStringHelper(this)
                 .add("name", name)
                 .add("createdDatetime", createdDatetime)
-                .add("sizeBytes", sizeBytes)
-                .add("numRows", numRows)
-                .add("minSequence", minSequence)
-                .add("maxSequence", maxSequence)
+                .add("splits", splits)
                 .toString();
     }
 
@@ -72,27 +65,9 @@ public final class IndexSegmentSplit
         return createdDatetime;
     }
 
-    @JsonProperty("size_bytes")
-    public long getSizeBytes()
+    @JsonProperty("splits")
+    public List<Split> getSplits()
     {
-        return sizeBytes;
-    }
-
-    @JsonProperty("num_rows")
-    public long getNumRows()
-    {
-        return numRows;
-    }
-
-    @JsonProperty("min_sequence")
-    public long getMinSequence()
-    {
-        return minSequence;
-    }
-
-    @JsonProperty("max_sequence")
-    public long getMaxSequence()
-    {
-        return maxSequence;
+        return splits;
     }
 }

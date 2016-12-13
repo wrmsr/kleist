@@ -25,11 +25,11 @@ import java.util.List;
 @Immutable
 public final class Index
 {
-    private final List<IndexSegment> segments;
+    private final List<Segment> segments;
 
     @JsonCreator
     public Index(
-            @JsonProperty("segments") List<IndexSegment> segments)
+            @JsonProperty("segments") List<Segment> segments)
     {
         this.segments = ImmutableList.copyOf(segments);
     }
@@ -43,7 +43,7 @@ public final class Index
     }
 
     @JsonProperty("segments")
-    public List<IndexSegment> getSegments()
+    public List<Segment> getSegments()
     {
         return segments;
     }

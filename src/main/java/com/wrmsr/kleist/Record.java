@@ -23,13 +23,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 @Immutable
-public final class Row
+public final class Record
 {
     private final long sequence;
     private final byte[] data;
 
     @JsonCreator
-    public Row(
+    public Record(
             @JsonProperty("sequence") long sequence,
             @JsonProperty("data") byte[] data)
     {
