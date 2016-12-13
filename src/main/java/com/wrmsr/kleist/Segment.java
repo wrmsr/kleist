@@ -16,47 +16,35 @@ package com.wrmsr.kleist;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import javax.annotation.concurrent.Immutable;
 
 import java.time.Instant;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
+import java.util.Map;
 
 @Immutable
 public final class Segment
 {
-    private final String name;
     private final Instant createdDatetime;
-    private final List<Split> splits;
+    private final Map<String, Split> splits;
 
     @JsonCreator
     public Segment(
-            @JsonProperty("name") String name,
             @JsonProperty("created_datetime") Instant createdDatetime,
-            @JsonProperty("splits") List<Split> splits)
+            @JsonProperty("splits") Map<String, Split> splits)
     {
-        this.name = requireNonNull(name);
         this.createdDatetime = createdDatetime;
-        this.splits = ImmutableList.copyOf(splits);
+        this.splits = ImmutableMap.copyOf(splits);
     }
 
     @Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this)
-                .add("name", name)
                 .add("createdDatetime", createdDatetime)
                 .add("splits", splits)
                 .toString();
-    }
-
-    @JsonProperty("name")
-    public String getName()
-    {
-        return name;
     }
 
     @JsonProperty("created_datetime")
@@ -66,7 +54,7 @@ public final class Segment
     }
 
     @JsonProperty("splits")
-    public List<Split> getSplits()
+    public Map<String, Split> getSplits()
     {
         return splits;
     }

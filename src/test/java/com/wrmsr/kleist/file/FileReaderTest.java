@@ -1,4 +1,4 @@
-package com.wrmsr.kleist.impl.file;
+package com.wrmsr.kleist.file;
 
 import junit.framework.TestCase;
 

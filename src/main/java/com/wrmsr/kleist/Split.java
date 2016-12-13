@@ -22,7 +22,6 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public final class Split
 {
-    private final String name;
     private final long sizeBytes;
     private final long numRecords;
     private final long minSequence;
@@ -30,13 +29,11 @@ public final class Split
 
     @JsonCreator
     public Split(
-            @JsonProperty("name") String name,
             @JsonProperty("size_bytes") long sizeBytes,
             @JsonProperty("num_records") long numRecords,
             @JsonProperty("min_sequence") long minSequence,
             @JsonProperty("max_sequence") long maxSequence)
     {
-        this.name = name;
         this.sizeBytes = sizeBytes;
         this.numRecords = numRecords;
         this.minSequence = minSequence;
@@ -47,18 +44,11 @@ public final class Split
     public String toString()
     {
         return MoreObjects.toStringHelper(this)
-                .add("name", name)
                 .add("sizeBytes", sizeBytes)
                 .add("numRecords", numRecords)
                 .add("minSequence", minSequence)
                 .add("maxSequence", maxSequence)
                 .toString();
-    }
-
-    @JsonProperty("name")
-    public String getName()
-    {
-        return name;
     }
 
     @JsonProperty("size_bytes")

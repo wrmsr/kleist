@@ -16,22 +16,22 @@ package com.wrmsr.kleist;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import javax.annotation.concurrent.Immutable;
 
-import java.util.List;
+import java.util.Map;
 
 @Immutable
 public final class Index
 {
-    private final List<Segment> segments;
+    private final Map<String, Segment> segments;
 
     @JsonCreator
     public Index(
-            @JsonProperty("segments") List<Segment> segments)
+            @JsonProperty("segments") Map<String, Segment> segments)
     {
-        this.segments = ImmutableList.copyOf(segments);
+        this.segments = ImmutableMap.copyOf(segments);
     }
 
     @Override
@@ -43,7 +43,7 @@ public final class Index
     }
 
     @JsonProperty("segments")
-    public List<Segment> getSegments()
+    public Map<String, Segment> getSegments()
     {
         return segments;
     }
