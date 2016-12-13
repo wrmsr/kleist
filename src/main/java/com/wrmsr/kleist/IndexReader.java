@@ -13,7 +13,10 @@
  */
 package com.wrmsr.kleist;
 
-public interface SegmentReader
+import java.io.IOException;
+
+public interface IndexReader
 {
-    RowIterator getRowIterator();
+    Index readIndex()
+            throws IOException;
 }
