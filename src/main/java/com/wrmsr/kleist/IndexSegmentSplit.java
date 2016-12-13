@@ -20,24 +20,31 @@ import com.google.common.base.MoreObjects;
 import javax.annotation.concurrent.Immutable;
 
 import java.time.Instant;
-import java.util.List;
 
 @Immutable
-public final class IndexSegment
+public final class IndexSegmentSplit
 {
     private final String name;
-    private final Instant createdDatetime;
-    private final List<IndexSegmentSplit> splits;
+    private final long sizeBytes;
+    private final long numRows;
+    private final long minSequence;
+    private final long maxSequence;
 
     @JsonCreator
-    public IndexSegment(
+    public IndexSegmentSplit(
             @JsonProperty("name") String name,
             @JsonProperty("created_datetime") Instant createdDatetime,
-            @JsonProperty("splits") List<IndexSegmentSplit> splits
+            @JsonProperty("size_bytes") long sizeBytes,
+            @JsonProperty("num_rows") long numRows,
+            @JsonProperty("min_sequence") long minSequence,
+            @JsonProperty("max_sequence") long maxSequence)
     {
         this.name = name;
         this.createdDatetime = createdDatetime;
-        this.splits = splits;
+        this.sizeBytes = sizeBytes;
+        this.numRows = numRows;
+        this.minSequence = minSequence;
+        this.maxSequence = maxSequence;
     }
 
     @Override
@@ -46,7 +53,10 @@ public final class IndexSegment
         return MoreObjects.toStringHelper(this)
                 .add("name", name)
                 .add("createdDatetime", createdDatetime)
-                .add("splits", splits)
+                .add("sizeBytes", sizeBytes)
+                .add("numRows", numRows)
+                .add("minSequence", minSequence)
+                .add("maxSequence", maxSequence)
                 .toString();
     }
 
@@ -62,9 +72,27 @@ public final class IndexSegment
         return createdDatetime;
     }
 
-    @JsonProperty("splits")
-    public List<IndexSegmentSplit> getSplits()
+    @JsonProperty("size_bytes")
+    public long getSizeBytes()
     {
-        return splits;
+        return sizeBytes;
+    }
+
+    @JsonProperty("num_rows")
+    public long getNumRows()
+    {
+        return numRows;
+    }
+
+    @JsonProperty("min_sequence")
+    public long getMinSequence()
+    {
+        return minSequence;
+    }
+
+    @JsonProperty("max_sequence")
+    public long getMaxSequence()
+    {
+        return maxSequence;
     }
 }
