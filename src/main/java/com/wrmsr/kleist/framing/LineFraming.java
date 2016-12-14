@@ -11,16 +11,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wrmsr.kleist.serialization;
+package com.wrmsr.kleist.framing;
+
+import com.wrmsr.kleist.BlockIterator;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-public interface Serialization<T>
+public final class LineFraming
+    implements Framing
 {
-    T decode(byte[] block)
-            throws IOException;
+    @Override
+    public BlockIterator decode(InputStream inputStream)
+            throws IOException
+    {
+        return null;
+    }
 
-    byte[] encode(T object)
-            throws IOException;
+    @Override
+    public OutputStream encode(BlockIterator blockIterator)
+            throws IOException
+    {
+        return null;
+    }
 }
-
