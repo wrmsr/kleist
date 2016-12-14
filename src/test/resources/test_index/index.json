@@ -1,18 +1,76 @@
 {
   "segments": {
     "0": {
+      "generation": 0,
       "created_datetime": "2016-11-16T00:00:00.000",
       "splits": {
         "0.json.txt": {
-
+          "size_bytes": 68,
+          "num_records": 3,
+          "min_sequence": 0,
+          "max_sequence": 2
+        },
+        "1.json.txt": {
+          "size_bytes": 71,
+          "num_records": 3,
+          "min_sequence": 3,
+          "max_sequence": 5
+        },
+        "2.json.txt": {
+          "size_bytes": 71,
+          "num_records": 3,
+          "min_sequence": 6,
+          "max_sequence": 8
         }
       }
     },
     "1": {
-
+      "generation": 1,
+      "created_datetime": "2016-11-17T00:00:00.000",
+      "splits": {
+        "0.json.txt": {
+          "size_bytes": 68,
+          "num_records": 3,
+          "min_sequence": 0,
+          "max_sequence": 2
+        },
+        "1.json.txt": {
+          "size_bytes": 71,
+          "num_records": 3,
+          "min_sequence": 3,
+          "max_sequence": 5
+        },
+        "2.json.txt": {
+          "size_bytes": 71,
+          "num_records": 3,
+          "min_sequence": 6,
+          "max_sequence": 8
+        }
+      }
     },
     "2": {
-
+      "generation": 2,
+      "created_datetime": "2016-11-18T00:00:00.000",
+      "splits": {
+        "0.json.txt": {
+          "size_bytes": 68,
+          "num_records": 3,
+          "min_sequence": 0,
+          "max_sequence": 2
+        },
+        "1.json.txt": {
+          "size_bytes": 71,
+          "num_records": 3,
+          "min_sequence": 3,
+          "max_sequence": 5
+        },
+        "2.json.txt": {
+          "size_bytes": 71,
+          "num_records": 3,
+          "min_sequence": 6,
+          "max_sequence": 8
+        }
+      }
     }
   }
 }
