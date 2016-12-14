@@ -2,7 +2,7 @@
   "segments": {
     "0": {
       "generation": 0,
-      "created_datetime": "2016-11-16T00:00:00.000",
+      "created_datetime": "2016-11-16T00:00:00.000+0000",
       "splits": {
         "0.json.txt": {
           "size_bytes": 68,
@@ -26,7 +26,7 @@
     },
     "1": {
       "generation": 1,
-      "created_datetime": "2016-11-17T00:00:00.000",
+      "created_datetime": "2016-11-17T00:00:00.000+0000",
       "splits": {
         "0.json.txt": {
           "size_bytes": 68,
@@ -50,7 +50,7 @@
     },
     "2": {
       "generation": 2,
-      "created_datetime": "2016-11-18T00:00:00.000",
+      "created_datetime": "2016-11-18T00:00:00.000+0000",
       "splits": {
         "0.json.txt": {
           "size_bytes": 68,
