@@ -13,26 +13,47 @@
  */
 package com.wrmsr.kleist.codec.stream;
 
+import com.google.common.base.Throwables;
+import org.apache.commons.compress.compressors.CompressorException;
+import org.apache.commons.compress.compressors.CompressorStreamFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
-public final class GzipStreamCodec
-    implements StreamCodec
+import static java.util.Objects.requireNonNull;
+
+public final class CompressorStreamCodec
+        implements StreamCodec
 {
+    private final String name;
+
+    public CompressorStreamCodec(String name)
+    {
+        this.name = requireNonNull(name);
+    }
+
     @Override
     public InputStream decode(InputStream inputStream)
             throws IOException
     {
-        return new GZIPInputStream(inputStream);
+        try {
+            return new CompressorStreamFactory().createCompressorInputStream(name, inputStream);
+        }
+        catch (CompressorException e) {
+            throw Throwables.propagate(e);
+        }
     }
 
     @Override
     public OutputStream encode(OutputStream outputStream)
             throws IOException
     {
-        return new GZIPOutputStream(outputStream);
+        try {
+            return new CompressorStreamFactory().createCompressorOutputStream(name, outputStream);
+        }
+        catch (CompressorException e) {
+            throw Throwables.propagate(e);
+        }
     }
 }

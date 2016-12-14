@@ -15,9 +15,13 @@ package com.wrmsr.kleist.codec.block;
 
 import io.airlift.slice.Slice;
 
+import java.io.IOException;
+
 public interface BlockCodec
 {
-    Slice decode(Slice slice);
+    byte[] decode(byte[] block)
+            throws IOException;
 
-    Slice encode(Slice slice);
+    byte[] encode(byte[] block)
+            throws IOException;
 }

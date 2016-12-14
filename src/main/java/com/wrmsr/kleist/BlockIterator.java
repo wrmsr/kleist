@@ -13,12 +13,10 @@
  */
 package com.wrmsr.kleist;
 
-import io.airlift.slice.Slice;
-
 import java.util.Iterator;
 
 public interface BlockIterator
-    extends Iterator<Slice>, AutoCloseable
+        extends Iterator<byte[]>, AutoCloseable
 {
     @Override
     default void close()

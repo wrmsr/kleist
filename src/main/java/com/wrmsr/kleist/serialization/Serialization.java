@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wrmsr.kleist;
+package com.wrmsr.kleist.serialization;
 
 import io.airlift.slice.Slice;
 
@@ -25,3 +25,4 @@ public interface Serialization<T>
     Slice encode(T object)
             throws IOException;
 }
+

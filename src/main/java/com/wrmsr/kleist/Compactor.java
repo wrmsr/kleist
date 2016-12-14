@@ -13,6 +13,6 @@
  */
 package com.wrmsr.kleist;
 
-public class Compactor
+public final class Compactor
 {
 }

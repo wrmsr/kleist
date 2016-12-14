@@ -11,8 +11,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wrmsr.kleist.codec.block;
+package com.wrmsr.kleist.framing;
 
-public class GzipBlockCodec
+import com.wrmsr.kleist.BlockIterator;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public interface Framing
 {
+    BlockIterator decode(InputStream inputStream)
+            throws IOException;
+
+    OutputStream encode(BlockIterator blockIterator)
+            throws IOException;
 }
