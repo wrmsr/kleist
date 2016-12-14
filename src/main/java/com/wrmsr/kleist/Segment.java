@@ -15,36 +15,59 @@ package com.wrmsr.kleist;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableMap;
 
 import javax.annotation.concurrent.Immutable;
 
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.wrmsr.kleist.util.Itertools.zip;
+import static com.wrmsr.kleist.util.collect.MoreCollectors.toLinkedHashMap;
+import static java.util.Objects.requireNonNull;
+
+@JsonPropertyOrder({
+        "generation",
+        "created_datetime",
+        "splits",
+})
 @Immutable
 public final class Segment
 {
+    private final long generation;
     private final Instant createdDatetime;
     private final Map<String, Split> splits;
 
     @JsonCreator
     public Segment(
+            @JsonProperty("generation") long generation,
             @JsonProperty("created_datetime") Instant createdDatetime,
             @JsonProperty("splits") Map<String, Split> splits)
     {
-        this.createdDatetime = createdDatetime;
-        this.splits = ImmutableMap.copyOf(splits);
+        checkArgument(generation >= 0);
+        this.generation = generation;
+        this.createdDatetime = requireNonNull(createdDatetime);
+        this.splits = splits.entrySet().stream().sorted(Comparator.comparing(e -> e.getValue().getMinSequence())).collect(toLinkedHashMap());
+        checkArgument(zip(this.splits.values().stream(), this.splits.values().stream().skip(1)).allMatch(pair -> pair.getLeft().getMaxSequence() < pair.getRight().getMinSequence()));
     }
 
     @Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this)
+                .add("generation", generation)
                 .add("createdDatetime", createdDatetime)
                 .add("splits", splits)
                 .toString();
+    }
+
+    @JsonProperty("generation")
+    public long getGeneration()
+    {
+        return generation;
     }
 
     @JsonProperty("created_datetime")

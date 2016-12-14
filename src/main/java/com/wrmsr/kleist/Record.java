@@ -15,6 +15,7 @@ package com.wrmsr.kleist;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.common.base.MoreObjects;
 
 import javax.annotation.concurrent.Immutable;
@@ -22,6 +23,10 @@ import javax.annotation.concurrent.Immutable;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+@JsonPropertyOrder({
+        "sequence",
+        "data",
+})
 @Immutable
 public final class Record
 {

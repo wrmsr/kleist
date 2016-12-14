@@ -15,13 +15,20 @@ package com.wrmsr.kleist;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableMap;
 
 import javax.annotation.concurrent.Immutable;
 
+import java.util.Comparator;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.wrmsr.kleist.util.collect.MoreCollectors.toLinkedHashMap;
+
+@JsonPropertyOrder({
+        "segments",
+})
 @Immutable
 public final class Index
 {
@@ -31,7 +38,8 @@ public final class Index
     public Index(
             @JsonProperty("segments") Map<String, Segment> segments)
     {
-        this.segments = ImmutableMap.copyOf(segments);
+        this.segments = segments.entrySet().stream().sorted(Comparator.comparing(e -> e.getValue().getGeneration())).collect(toLinkedHashMap());
+        checkArgument(this.segments.values().stream().map(Segment::getGeneration).distinct().count() == segments.size());
     }
 
     @Override

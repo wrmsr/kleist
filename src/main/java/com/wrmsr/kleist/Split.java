@@ -15,10 +15,19 @@ package com.wrmsr.kleist;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.common.base.MoreObjects;
 
 import javax.annotation.concurrent.Immutable;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
+@JsonPropertyOrder({
+        "size_bytes",
+        "num_records",
+        "min_sequence",
+        "max_sequence",
+})
 @Immutable
 public final class Split
 {
@@ -34,6 +43,10 @@ public final class Split
             @JsonProperty("min_sequence") long minSequence,
             @JsonProperty("max_sequence") long maxSequence)
     {
+        checkArgument(sizeBytes >= 0);
+        checkArgument(numRecords >= 0);
+        checkArgument(minSequence >= 0);
+        checkArgument(maxSequence >= minSequence);
         this.sizeBytes = sizeBytes;
         this.numRecords = numRecords;
         this.minSequence = minSequence;

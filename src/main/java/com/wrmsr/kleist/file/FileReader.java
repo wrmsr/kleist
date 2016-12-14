@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wrmsr.kleist.Index;
 import com.wrmsr.kleist.Reader;
 import com.wrmsr.kleist.RecordIterator;
+import com.wrmsr.kleist.util.Json;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -42,7 +43,7 @@ public final class FileReader
 
     public FileReader(Path rootPath)
     {
-        this(rootPath, new ObjectMapper());
+        this(rootPath, Json.OBJECT_MAPPER_SUPPLIER.get());
     }
 
     @Override
