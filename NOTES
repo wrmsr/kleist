@@ -51,6 +51,7 @@ pg_xlog backup watchdog, kill pid and drop slot
 schematizer? heartbeat daemon? failover?
 
 
-
+http://avro.apache.org/docs/1.8.1/spec.html#Protocol+Wire+Format
+https://wiki.apache.org/hadoop/SequenceFile
 http://bigdataconcepts-nsm.blogspot.com/2012/09/rc-file-rcfile-record-columnar-file-is.html
 https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC
