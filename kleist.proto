@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package kleist;
+
+import "google/protobuf/timestamp.proto";
+
+message Index {
+  map<string, Segment> segments = 1;
+}
+
+message Segment {
+  uint64 generation = 1;
+  google.protobuf.Timestamp created_at = 2;
+  map<string, Split> splits = 3;
+}
+
+message Split {
+  uint64 size_bytes = 1;
+  uint64 num_records = 2;
+  uint64 min_sequence = 3;
+  uint64 max_sequence = 4;
+}
+
+message Record {
+  uint64 sequence = 1;
+  bytes data = 2;
+}
